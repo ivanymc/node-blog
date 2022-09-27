@@ -1,0 +1,27 @@
+<nav>
+    <div class="site-title">
+       <a href="/">
+            <h1> Blog </h1>
+        </a>
+    </div>
+    <ul>
+       <li><a href="/about"> About </a></li>
+       <li><a href="/blogs"> Blogs </a></li>
+       <li><a href="/blogs/create"> Create New Blog </a></li>
+
+       <% if (user) { %>
+        <li> Welcome, <%= user.name %>
+            <span> | </span>
+            <a href="/auth/logout"> Logout </a>
+        </li>
+        <% } else { %>
+       <li>
+        <a href="/auth/login"> Login  </a>
+        <span class="spanBetweenLoginAndRegister"> / </span>
+        <a href="/auth/register"> Register </a>
+       </li>
+       <% } %>
+       
+    </ul>
+</nav>
+

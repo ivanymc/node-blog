@@ -1,0 +1,27 @@
+<html lang="en">
+<head>
+  <%- include('../partials/header.ejs') %>
+</head>
+<body>
+
+  <%- include('../partials/nav.ejs') %>
+
+  <div class="blogs content">
+    <h2>All Blogs</h2>
+
+    <% blogs && blogs.map( blog => { %>
+      <a class="single" href="/blogs/<%= blog._id %>">
+        <div class="blogs-content">
+          <h3> <%= blog.title %> </h3>
+          <p> <%= blog.snippet %> </p>
+        </div>
+      </a>
+      
+    <% }) %>
+    
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+
+</body>
+</html>

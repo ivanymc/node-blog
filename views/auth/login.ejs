@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+  <%- include('../partials/header.ejs') %>
+</head>
+<body>
+  
+  <%- include('../partials/nav.ejs') %>
+
+  <div class="about content">
+    <h2>Login in &#128394; </h2>
+    <p> acc: test </p>
+    <p> pw: 1234 </p>
+
+    <div class="login content">
+      <form action="/auth/login" method="POST">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" required> 
+        <div class="name error"> </div>
+  
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password" minlength="4" required />
+        <div class="password error"> </div>
+  
+        <div class="login-button">
+          <button class="submit-button"> Login </button>
+          <button class="submit-button google-login-button"> Login with Google </button>
+        </div>
+      </form>
+
+      <div class="login-button">
+        <button class="register-button"> Register </button>
+      </div>
+    </div>
+    
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+
+  <script>
+    // Going to Register
+    const registerButton = document.querySelector('.register-button');
+    registerButton.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = "/auth/register";
+    })
+
+    // Going to Google Login
+    const googleLoginButton = document.querySelector('.google-login-button');
+    googleLoginButton.addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = "/auth/google";
+    })
+
+
+    const form = document.querySelector('form');
+    const nameError = document.querySelector('.name.error');
+    const passwordError = document.querySelector('.password.error');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      nameError.textContent = '';
+      passwordError.textContent = '';
+
+      const name = form.name.value;
+      const password = form.password.value;
+
+      try {
+        const res = await fetch('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify( { name, password }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await res.json();
+        console.log(data);
+
+        // if errors, show on front-end
+        if (data.errors) {
+          nameError.textContent = data.errors.name;
+          passwordError.textContent = data.errors.password;
+        }
+
+        if (data.user) {
+          location.assign('/blogs');
+        }
+      }
+      catch(err) { console.log(err) };
+  });
+
+
+
+
+  </script>
+
+</body>
+</html>
