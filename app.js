@@ -22,6 +22,7 @@ const app = express();
 app.set('view engine', 'ejs');
 
 // middleware & static files 
+app.use(cors());
 app.use(morgan('tiny'));
 // make form submit attach to req, able req.body
 app.use(express.urlencoded({ extended: true }));
