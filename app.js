@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import session from 'cookie-session';
 import passport from 'passport';
+import cors from 'cors';
 import 'dotenv/config';
 
 // Routes
