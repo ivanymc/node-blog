@@ -10,6 +10,9 @@ import 'dotenv/config';
 import blogDeatilsRoutes from './routes/blogDetailsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 
+// React Blogs
+import { saveReactBlogs, displayReactBlogs } from '../controllers/blogControllers.js';
+
 // Middleware
 import { authMiddleware, checkUserMiddleware } from './middleware/authMiddleware.js';
 
@@ -62,6 +65,10 @@ app.get('/about', authMiddleware, (req, res) => {
 
 // blog details routes
 app.use('/blogs', authMiddleware, blogDeatilsRoutes);
+
+// For React Blog
+app.get('/reactBlogs', displayReactBlogs);
+app.post('/reactBlogs', saveReactBlogs);
 
 // all other url req will go to this url
 // so this must put in the bottom, wait above matching first
