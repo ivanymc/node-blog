@@ -32,6 +32,10 @@ app.use(express.static('public'));
 // file inside public can assess from front-end
 // because default server dont allow end-user to touch file
 
+const corsOptions = {
+  origin: 'https://ivanymc.github.io/react-blog'
+};
+
 // Cookie session
 app.use(cookieParser());
 app.use(session({
@@ -50,6 +54,10 @@ mongoose.connect(dbURL)
   .then(result => app.listen(3000))
   .catch(err => console.log(err));
 
+
+// For React Blog
+app.get('/reactblogs', cors(corsOptions), displayReactBlogs);
+app.post('/reactblogs', cors(corsOptions), saveReactBlogs);
   
 // Auth
 app.get('*', checkUserMiddleware);
@@ -67,9 +75,7 @@ app.get('/about', authMiddleware, (req, res) => {
 // blog details routes
 app.use('/blogs', authMiddleware, blogDeatilsRoutes);
 
-// For React Blog
-app.get('/reactblogs', displayReactBlogs);
-app.post('/reactblogs', saveReactBlogs);
+
 
 // all other url req will go to this url
 // so this must put in the bottom, wait above matching first
