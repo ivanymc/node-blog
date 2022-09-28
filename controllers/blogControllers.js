@@ -1,5 +1,5 @@
 import Blog from '../models/Blog.js';
-import ReactBlog from '../models/Reactblog.js';
+import Reactblog from '../models/Reactblog.js'
 
 const getCreateBlog = (req, res) => {
   res.render('blogs/create', { title: 'Create' });
@@ -42,7 +42,7 @@ const saveReactBlogs = (req, res) => {
 };
 
 const displayReactBlogs = (req, res) => {
-  ReactBlog.find().sort( { createdAt: 0 } )
+  Reactblog.find().sort( { createdAt: 0 } )
     .then( result => res.send(result))
     .catch( err => console.log(err));
 };
