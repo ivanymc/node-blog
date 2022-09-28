@@ -67,8 +67,8 @@ app.get('/about', authMiddleware, (req, res) => {
 app.use('/blogs', authMiddleware, blogDeatilsRoutes);
 
 // For React Blog
-app.get('/reactBlogs', displayReactBlogs);
-app.post('/reactBlogs', saveReactBlogs);
+app.get('/reactblogs', displayReactBlogs);
+app.post('/reactblogs', saveReactBlogs);
 
 // all other url req will go to this url
 // so this must put in the bottom, wait above matching first
