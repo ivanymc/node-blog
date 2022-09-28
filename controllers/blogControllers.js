@@ -1,5 +1,5 @@
 import Blog from '../models/Blog.js';
-import ReactBlog from '../models/ReactBlog.js';
+import ReactBlog from '../models/Reactblog.js';
 
 const getCreateBlog = (req, res) => {
   res.render('blogs/create', { title: 'Create' });
