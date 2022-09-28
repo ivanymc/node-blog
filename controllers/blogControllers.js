@@ -35,8 +35,8 @@ const deleteBlog = (req, res) => {
 
 // React Blog
 const saveReactBlogs = (req, res) => {
-  const blog = new Reactblog(req.body);
-  blog.save()
+  const reactblog = new Reactblog(req.body);
+  reactblog.save()
     .then( result => res.send("hello"))
     .catch( err => console.log(err));
 };

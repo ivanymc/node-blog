@@ -33,7 +33,7 @@ app.use(express.static('public'));
 // because default server dont allow end-user to touch file
 
 const corsOptions = {
-  origin: 'https://ivanymc.github.io/react-blog'
+  origin: ['https://ivanymc.github.io/react-blog', 'https://ivanymc.github.io', 'http://ivanymc.github.io/react-blog']
 };
 
 // Cookie session
