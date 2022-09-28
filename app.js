@@ -11,7 +11,7 @@ import blogDeatilsRoutes from './routes/blogDetailsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 
 // React Blogs
-import { saveReactBlogs, displayReactBlogs } from '../controllers/blogControllers.js';
+import { saveReactBlogs, displayReactBlogs } from './controllers/blogControllers.js';
 
 // Middleware
 import { authMiddleware, checkUserMiddleware } from './middleware/authMiddleware.js';
