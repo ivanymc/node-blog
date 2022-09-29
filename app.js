@@ -26,11 +26,10 @@ app.set('view engine', 'ejs');
 // cors
 const corsOptions = {
   origin: '*',
-  methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'application/json']
 };
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // middleware & static files 
 app.use(morgan('tiny'));
@@ -58,13 +57,13 @@ app.use(passport.session());
 const dbURL = `mongodb+srv://${process.env.mongoUser}:${process.env.mongoPw}@node.qrxhn.mongodb.net/${process.env.mongoDBName}?retryWrites=true&w=majority`;
 
 mongoose.connect(dbURL)
-  .then(result => app.listen(3000))
+  .then(result => app.listen(8000))
   .catch(err => console.log(err));
 
 
 // For React Blog
-app.get('/reactblogs', cors(corsOptions), displayReactBlogs);
-app.post('/reactblogs', cors(corsOptions), saveReactBlogs);
+app.get('/reactblogs', displayReactBlogs);
+app.post('/reactblogs', saveReactBlogs);
   
 // Auth
 app.get('*', checkUserMiddleware);
