@@ -22,8 +22,18 @@ const app = express();
 // register view engine
 app.set('view engine', 'ejs');
 
+
+// cors
+const corsOptions = {
+  origin: '*',
+  methods: ['GET', 'POST', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'application/json']
+};
+
+app.use(cors(corsOptions));
+
+
 // middleware & static files 
-app.use(cors());
 app.use(morgan('tiny'));
 // make form submit attach to req, able req.body
 app.use(express.urlencoded({ extended: true }));
@@ -33,9 +43,6 @@ app.use(express.static('public'));
 // file inside public can assess from front-end
 // because default server dont allow end-user to touch file
 
-const corsOptions = {
-  origin: ['https://ivanymc.github.io/react-blog', 'https://ivanymc.github.io', 'http://ivanymc.github.io/react-blog']
-};
 
 // Cookie session
 app.use(cookieParser());
@@ -57,8 +64,8 @@ mongoose.connect(dbURL)
 
 
 // For React Blog
-app.get('/reactblogs', cors(corsOptions), displayReactBlogs);
-app.post('/reactblogs', cors(corsOptions), saveReactBlogs);
+app.get('/reactblogs', displayReactBlogs);
+app.post('/reactblogs', saveReactBlogs);
   
 // Auth
 app.get('*', checkUserMiddleware);
