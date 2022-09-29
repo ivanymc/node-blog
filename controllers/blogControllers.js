@@ -1,5 +1,5 @@
 import Blog from '../models/Blog.js';
-import Reactblog from '../models/Reactblog.js';
+
 
 const getCreateBlog = (req, res) => {
   res.render('blogs/create', { title: 'Create' });
@@ -33,20 +33,7 @@ const deleteBlog = (req, res) => {
 };
 
 
-// React Blog
-const saveReactBlogs = (req, res) => {
-  const reactblog = new Reactblog(req.body);
-  reactblog.save()
-    .then( result => res.send("hello"))
-    .catch( err => console.log(err));
-};
 
-const displayReactBlogs = (req, res) => {
-  Reactblog.find().sort( { createdAt: 0 } )
-    .then( result => res.send(result))
-    .catch( err => console.log(err));
-};
- 
 
 
 export {
@@ -54,7 +41,5 @@ export {
   getAllBlogs,
   getBlog,
   postBlog,
-  deleteBlog,
-  displayReactBlogs,
-  saveReactBlogs
+  deleteBlog
 };

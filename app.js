@@ -4,15 +4,11 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import session from 'cookie-session';
 import passport from 'passport';
-import cors from 'cors';
 import 'dotenv/config';
 
 // Routes
 import blogDeatilsRoutes from './routes/blogDetailsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
-
-// React Blogs
-import { saveReactBlogs, displayReactBlogs } from './controllers/blogControllers.js';
 
 // Middleware
 import { authMiddleware, checkUserMiddleware } from './middleware/authMiddleware.js';
@@ -22,14 +18,6 @@ const app = express();
 // register view engine
 app.set('view engine', 'ejs');
 
-
-// cors
-const corsOptions = {
-  origin: '*',
-  allowedHeaders: ['Content-Type', 'application/json']
-};
-
-app.use(cors(corsOptions));
 
 // middleware & static files 
 app.use(morgan('tiny'));
@@ -59,11 +47,6 @@ const dbURL = `mongodb+srv://${process.env.mongoUser}:${process.env.mongoPw}@nod
 mongoose.connect(dbURL)
   .then(result => app.listen(8000))
   .catch(err => console.log(err));
-
-
-// For React Blog
-app.get('/reactblogs', displayReactBlogs);
-app.post('/reactblogs', saveReactBlogs);
   
 // Auth
 app.get('*', checkUserMiddleware);
@@ -80,7 +63,6 @@ app.get('/about', authMiddleware, (req, res) => {
 
 // blog details routes
 app.use('/blogs', authMiddleware, blogDeatilsRoutes);
-
 
 
 // all other url req will go to this url
