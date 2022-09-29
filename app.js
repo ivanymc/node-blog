@@ -30,8 +30,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'application/json']
 };
 
-app.use(cors(corsOptions));
-
+// app.use(cors(corsOptions));
 
 // middleware & static files 
 app.use(morgan('tiny'));
@@ -64,8 +63,8 @@ mongoose.connect(dbURL)
 
 
 // For React Blog
-app.get('/reactblogs', displayReactBlogs);
-app.post('/reactblogs', saveReactBlogs);
+app.get('/reactblogs', cors(corsOptions), displayReactBlogs);
+app.post('/reactblogs', cors(corsOptions), saveReactBlogs);
   
 // Auth
 app.get('*', checkUserMiddleware);
